@@ -1,0 +1,70 @@
+import macowins.*
+
+test "Conocer el precio de venta de una prenda " {
+
+	const nueva = new Nueva()
+	const prenda = new Prenda(precio = 1000, estado = nueva, tipo = "Pantalon" )
+	
+	assert.equals(prenda.precio(), 1000)
+
+}
+
+test "Conocer el tipo de prenda de una prenda " {
+
+	const nueva = new Nueva()
+	const prenda = new Prenda(precio = 1000, estado = nueva, tipo = "Pantalon" )
+	
+	assert.equals(prenda.tipo(), "Pantalon")
+
+}
+
+test "Guardar las ventas de las prendas " {
+
+	const nueva = new Nueva()
+	const promocion = new Promocion(valorPromocion = 50)
+	const liquidacion = new Liquidacion()
+	const pantalon = new Prenda(precio = 1000, estado = nueva, tipo = "Pantalon" )
+	const camisa = new Prenda(precio = 1000, estado = promocion, tipo = "Camisa" )
+	const saco = new Prenda(precio = 1000, estado = liquidacion, tipo = "Saco" )
+	
+	const efectivo = new Efectivo()
+	const tarjeta = new Tarjeta(cantidadCuotas = 3, coeficienteFijo = 2)
+	
+	const venta1 = new Venta(fecha = new Date(), formaPago = efectivo )
+	const venta2 = new Venta(fecha = new Date().minusMonths(1), formaPago = tarjeta )
+	venta1.agregarPrenda(pantalon,2)
+	venta1.agregarPrenda(camisa, 1)
+	venta2.agregarPrenda(saco, 3)
+	venta2.agregarPrenda(pantalon,1)
+	
+	const macowins = new Macowins()
+	macowins.registrarVenta(venta1)
+	macowins.registrarVenta(venta2)
+	assert.equals(macowins.ventasRegistradas(), [venta1, venta2])
+
+}
+test "Conocer las ganancias de un determinado dia" {
+
+	const nueva = new Nueva()
+	const promocion = new Promocion(valorPromocion = 50)
+	const liquidacion = new Liquidacion()
+	const pantalon = new Prenda(precio = 1000, estado = nueva, tipo = "Pantalon" )
+	const camisa = new Prenda(precio = 500, estado = promocion, tipo = "Camisa" )
+	const saco = new Prenda(precio = 300, estado = liquidacion, tipo = "Saco" )
+	
+	const efectivo = new Efectivo()
+	const tarjeta = new Tarjeta(cantidadCuotas = 3, coeficienteFijo = 2)
+	
+	const venta1 = new Venta(fecha = new Date(), formaPago = efectivo )
+	const venta2 = new Venta(fecha = new Date().minusMonths(1), formaPago = tarjeta )
+	venta1.agregarPrenda(pantalon,2)
+	venta1.agregarPrenda(camisa, 1)
+	venta2.agregarPrenda(saco, 3)
+	venta2.agregarPrenda(pantalon,1)
+	
+	const macowins = new Macowins()
+	macowins.registrarVenta(venta1)
+	macowins.registrarVenta(venta2)
+	assert.equals(macowins.gananciasEnFecha(new Date()), 2450)
+
+}
