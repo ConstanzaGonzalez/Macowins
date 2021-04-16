@@ -27,7 +27,7 @@ class Liquidacion{
     method calcularPrecio(precio) = precio * 0.5
 }
 
-class Macowins{
+object macowins{
     const property ventasRegistradas = []
     method registrarVenta(venta){
         ventasRegistradas.add(venta)

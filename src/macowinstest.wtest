@@ -37,7 +37,6 @@ test "Guardar las ventas de las prendas " {
 	venta2.agregarPrenda(saco, 3)
 	venta2.agregarPrenda(pantalon,1)
 	
-	const macowins = new Macowins()
 	macowins.registrarVenta(venta1)
 	macowins.registrarVenta(venta2)
 	assert.equals(macowins.ventasRegistradas(), [venta1, venta2])
@@ -61,8 +60,7 @@ test "Conocer las ganancias de un determinado dia" {
 	venta1.agregarPrenda(camisa, 1)
 	venta2.agregarPrenda(saco, 3)
 	venta2.agregarPrenda(pantalon,1)
-	
-	const macowins = new Macowins()
+
 	macowins.registrarVenta(venta1)
 	macowins.registrarVenta(venta2)
 	assert.equals(macowins.gananciasEnFecha(new Date()), 2450)
